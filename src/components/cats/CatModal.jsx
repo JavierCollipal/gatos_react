@@ -14,9 +14,8 @@ const useStyles = makeStyles({
     },
 });
 
-const CatModal = (props) => {
+const CatModal = ({cat, manageModal}) => {
     const classes = useStyles();
-    const { cat } = props;
     return (
         <div>
             <Card className={classes.root}>
@@ -45,7 +44,7 @@ const CatModal = (props) => {
                     <Button size="small" color="primary">
                         Guardar
                     </Button>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" onclick={() => manageModal(false)}>
                         Cancelar
                     </Button>
                 </CardActions>

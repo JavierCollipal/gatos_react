@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import CatTable from "./CatTable";
 import CatModal from "./CatModal";
+import CatActions from "./CatActions";
 
 const mockCat = { name: 'lanita', age: 1, breed: 'angora', imageUrl: 'https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg'};
 const catData = [
-    { name: 'Lanita', breed: 'Angora', age: 237},
-    { name: 'Plomo', breed: 'Angora', age: 27},
-    { name: 'Micha', breed: 'Carey', age: 3},
+    { name: 'Lanita', breed: 'Angora', age: 237, imageUrl: 'https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg'},
+    { name: 'Plomo', breed: 'Angora', age: 27, imageUrl: 'https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg'},
+    { name: 'Micha', breed: 'Carey', age: 3, imageUrl: 'https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg'},
 ];
+
 const Cats = () => {
-    const [cats , setCats] =  useState(catData);
+    const [cats, setCats] =  useState(catData);
+    const [modal, setModal] = useState(false);
+    const [selectedCat, setSelectedCat] = useState(mockCat);
 
     const changeCatData = (action) => {
         switch (action) {
@@ -28,12 +32,19 @@ const Cats = () => {
         }
 
     };
+    const manageModal = (change) => setModal(change);
+    const handleUpdateModal = (cat) => {
+        setSelectedCat(cat);
+        manageModal(true);
+    };
+
     return (
         <div>
-            <CatTable title={"tabla de gatos"} cats={cats}/>
-            <CatModal cat={mockCat}/>
-            <button onClick={() => changeCatData('CHANGE')}>Cambiar la data de gatos</button>
-            <button onClick={() => changeCatData('RESTORE')}>Restaurar la data gatos</button>
+            <CatActions changeCatData={changeCatData}/>
+            <CatTable title={"tabla de gatos"} cats={cats} handleUpdateModal={handleUpdateModal} />
+            {modal ? <CatModal cat={selectedCat}  manageModal={manageModal}/> : null}
+
+
         </div>
     )
 };

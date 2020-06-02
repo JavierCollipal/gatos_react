@@ -2,10 +2,7 @@ import React from 'react'
 import PropTypes from "prop-types";
 import MaterialTable from "material-table";
 
-const handleUpdate = (cat) => {
-    console.log(cat)
-};
-const CatTable = ({title, cats}) => {
+const CatTable = ({title, cats, handleUpdateModal}) => {
     const tableColumns = [
         { title: 'Nombre', field: 'name' },
         { title: 'Raza', field: 'breed' },
@@ -18,7 +15,7 @@ const CatTable = ({title, cats}) => {
                 title={title}
                 columns={tableColumns}
                 data={cats}
-                onRowClick={(event,rowData) => handleUpdate(rowData)}
+                onRowClick={(event,rowData) => handleUpdateModal(rowData)}
             />
         </div>
     );
