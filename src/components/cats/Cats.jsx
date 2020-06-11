@@ -42,7 +42,7 @@ const Cats = () => {
         <div>
             <CatActions changeCatData={changeCatData}/>
             <CatTable title={"tabla de gatos"} cats={cats} handleUpdateModal={handleUpdateModal} />
-            {modal ? <CatModal cat={selectedCat}  manageModal={manageModal}/> : null}
+            { modal ? <CatModal cat={selectedCat}  manageModal={manageModal}/> : null }
 
 
         </div>
