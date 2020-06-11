@@ -4,6 +4,7 @@ import MaterialTable from "material-table";
 
 const CatTable = ({title, cats, handleUpdateModal}) => {
     const tableColumns = [
+        { title: 'Id', field: 'id' },
         { title: 'Nombre', field: 'name' },
         { title: 'Raza', field: 'breed' },
         { title: 'Edad', field: 'age', type: 'numeric' },
