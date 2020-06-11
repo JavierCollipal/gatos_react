@@ -44,7 +44,7 @@ const CatModal = ({cat, manageModal}) => {
                     <Button size="small" color="primary">
                         Guardar
                     </Button>
-                    <Button size="small" color="primary" onclick={() => manageModal(false)}>
+                    <Button size="small" color="primary" onClick={() => manageModal(false)}>
                         Cancelar
                     </Button>
                 </CardActions>

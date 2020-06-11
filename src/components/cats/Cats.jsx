@@ -37,14 +37,16 @@ const Cats = () => {
         setSelectedCat(cat);
         manageModal(true);
     };
+    const addCat = (cat) => {
+        setCats(cats.concat(cat));
 
+    };
     return (
         <div>
             <CatActions changeCatData={changeCatData}/>
+            <button onClick={() => addCat(mockCat)}> Agregar un gato de manera inmutable</button>
             <CatTable title={"tabla de gatos"} cats={cats} handleUpdateModal={handleUpdateModal} />
             { modal ? <CatModal cat={selectedCat}  manageModal={manageModal}/> : null }
-
-
         </div>
     )
 };
