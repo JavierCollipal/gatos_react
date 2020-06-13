@@ -1,52 +1,68 @@
 import React, { useState } from "react";
 import CatTable from "./CatTable";
 import CatModal from "./CatModal";
-import CatActions from "./CatActions";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 
-const mockCat = { name: 'lanita', age: 1, breed: 'angora', imageUrl: 'https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg'};
-const catData = [
-    { name: 'Lanita', breed: 'Angora', age: 237, imageUrl: 'https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg'},
-    { name: 'Plomo', breed: 'Angora', age: 27, imageUrl: 'https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg'},
-    { name: 'Micha', breed: 'Carey', age: 3, imageUrl: 'https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg'},
-];
+const mockCat = {
+  id: Date.now(),
+  name: "lanita",
+  age: 1,
+  breed: "angora",
+  imageUrl:
+    "https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg",
+};
+const catData = [];
+const generateMockCat = () => ({
+  id: Date.now(),
+  name: "lanita",
+  age: 1,
+  breed: "angora",
+  imageUrl:
+    "https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg",
+});
 
 const Cats = () => {
-    const [cats, setCats] =  useState(catData);
-    const [modal, setModal] = useState(false);
-    const [selectedCat, setSelectedCat] = useState(mockCat);
+  const [cats, setCats] = useState(catData);
+  const [modal, setModal] = useState(false);
+  const [selectedCat, setSelectedCat] = useState(mockCat);
 
-    const changeCatData = (action) => {
-        switch (action) {
-            case 'CHANGE':
-                setCats([
-                    { name: 'Lanita cambiada', breed: 'Angora cambiado', age: 237},
-                    { name: 'Plomo cambiado', breed: 'Angora cambiado', age: 27},
-                    { name: 'Micha', breed: 'Carey', age: 3},
-                ]);
-                break;
-            case 'RESTORE':
-                setCats(catData);
-                break;
-            default:
-                break;
-        }
+  const manageModal = (change) => setModal(change);
+  const handleUpdateModal = (cat) => {
+    setSelectedCat(cat);
+    manageModal(true);
+  };
+  const addCat = (cat) => {
+    setCats(cats.concat(cat));
+  };
+  const deleteCat = (catId) => {
+    setCats(cats.filter((cat) => cat.id !== catId));
+    manageModal(false);
+  };
 
-    };
-    const manageModal = (change) => setModal(change);
-    const handleUpdateModal = (cat) => {
-        setSelectedCat(cat);
-        manageModal(true);
-    };
-
-    return (
-        <div>
-            <CatActions changeCatData={changeCatData}/>
-            <CatTable title={"tabla de gatos"} cats={cats} handleUpdateModal={handleUpdateModal} />
-            { modal ? <CatModal cat={selectedCat}  manageModal={manageModal}/> : null }
-
-
-        </div>
-    )
+  return (
+    <Box>
+      <Grid container>
+        <Grid item xs={12}>
+          <Button onClick={() => addCat(generateMockCat())}>
+            Agregar un gato de manera inmutable
+          </Button>
+          <CatTable
+            title={"tabla de gatos"}
+            cats={cats}
+            handleUpdateModal={handleUpdateModal}
+          />
+          <CatModal
+            cat={selectedCat}
+            manageModal={manageModal}
+            modalState={modal}
+            deleteCat={deleteCat}
+          />
+        </Grid>
+      </Grid>
+    </Box>
+  );
 };
 
 export default Cats;
