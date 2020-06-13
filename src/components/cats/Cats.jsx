@@ -36,11 +36,15 @@ const Cats = () => {
   const addCat = (cat) => {
     setCats(cats.concat(cat));
   };
+  const deleteCat = (catId) => {
+    setCats(cats.filter((cat) => cat.id !== catId));
+    manageModal(false);
+  };
 
   return (
     <Box>
-      <Grid container spacing={2}>
-        <Grid item xs={12} padding={29}>
+      <Grid container>
+        <Grid item xs={12}>
           <Button onClick={() => addCat(generateMockCat())}>
             Agregar un gato de manera inmutable
           </Button>
@@ -49,9 +53,12 @@ const Cats = () => {
             cats={cats}
             handleUpdateModal={handleUpdateModal}
           />
-          {modal ? (
-            <CatModal cat={selectedCat} manageModal={manageModal} />
-          ) : null}
+          <CatModal
+            cat={selectedCat}
+            manageModal={manageModal}
+            modalState={modal}
+            deleteCat={deleteCat}
+          />
         </Grid>
       </Grid>
     </Box>

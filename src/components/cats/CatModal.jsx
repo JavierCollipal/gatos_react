@@ -14,47 +14,56 @@ const useStyles = makeStyles({
   },
 });
 
-const CatModal = ({ cat, manageModal }) => {
+const CatModal = ({ cat, modalState, manageModal, deleteCat }) => {
   const classes = useStyles();
-  return (
-    <div>
-      <Card className={classes.root}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image={cat.imageUrl}
-            title={cat.name}
-          />
-          <CardContent>
-            <Grid container spacing={4}>
-              <Grid item xs>
-                {cat.name}
+  if (modalState) {
+    return (
+      <div>
+        <Card className={classes.root}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="140"
+              image={cat.imageUrl}
+              title={cat.name}
+            />
+            <CardContent>
+              <Grid container spacing={4}>
+                <Grid item xs>
+                  {cat.name}
+                </Grid>
+                <Grid item xs>
+                  {cat.breed}
+                </Grid>
+                <Grid item xs>
+                  {cat.age}
+                </Grid>
               </Grid>
-              <Grid item xs>
-                {cat.breed}
-              </Grid>
-              <Grid item xs>
-                {cat.age}
-              </Grid>
-            </Grid>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Guardar
-          </Button>
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => manageModal(false)}
-          >
-            Cancelar
-          </Button>
-        </CardActions>
-      </Card>
-    </div>
-  );
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button size="small" color="primary">
+              Guardar
+            </Button>
+            <Button
+              size="small"
+              color="secondary"
+              onClick={() => deleteCat(cat.id)}
+            >
+              Eliminar
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => manageModal(false)}
+            >
+              Cancelar
+            </Button>
+          </CardActions>
+        </Card>
+      </div>
+    );
+  } else return null;
 };
 
 export default CatModal;
