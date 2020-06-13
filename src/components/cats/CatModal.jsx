@@ -25,7 +25,7 @@ const CatModal = ({cat, manageModal}) => {
                         height="140"
                         image={cat.imageUrl}
                         title={cat.name}
-                    />
+                     />
                     <CardContent>
                         <Grid container spacing={4}>
                             <Grid item xs>
