@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   link: { textDecoration: "none", color: "white" },
 });
+
 const NabVar = ({ title }) => {
   const classes = useStyles();
   return (
@@ -20,18 +21,14 @@ const NabVar = ({ title }) => {
               <Typography variant="h6">{title}</Typography>
             </Grid>
             <Grid item xs={1}>
-              <Typography>
-                <Link to="/" className={classes.link}>
-                  Home
-                </Link>
-              </Typography>
+              <Link to="/" className={classes.link}>
+                Home
+              </Link>
             </Grid>
             <Grid item xs={1}>
-              <Typography>
-                <Link to="/cats" className={classes.link}>
-                  cats
-                </Link>
-              </Typography>
+              <Link to="/cats" className={classes.link}>
+                cats
+              </Link>
             </Grid>
           </Grid>
         </Toolbar>
