@@ -1,37 +1,29 @@
-import React from 'react';
-import './App.css';
-import Title from "./components/concepts/Title";
+import React from "react";
+import "./App.css";
 import Cats from "./components/cats/Cats";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Home from "./components/home/Home";
+import NabVar from "./components/ui/NabVar";
+import Container from "@material-ui/core/Container";
 
+const appTitle = "Cat Apps";
 
 function App() {
   return (
     <div className="App">
-        <Title name="Cat Apps"/>
-        <div>
-            <Router>
-
-                <Link to="/cats">cats</Link>
-
-                <Switch>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-                    <Route path="/cats">
-                        <Cats />
-                    </Route>
-                </Switch>
-
-            </Router>
-        </div>
-
+      <NabVar title={appTitle} />
+      <div>
+        <Container>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/cats">
+              <Cats />
+            </Route>
+          </Switch>
+        </Container>
+      </div>
     </div>
   );
 }
