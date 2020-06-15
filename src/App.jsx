@@ -6,17 +6,19 @@ import Container from "@material-ui/core/Container";
 import Loadable from "react-loadable";
 import { connect } from "react-redux";
 import { increment, decrement, setter } from "./reducers";
-import Counter from "./components/counter/Counter";
 
+//llevar esto a otro folder
 const Loader = (x) =>
   Loadable({
     loading: () => "Cargando...",
     loader: x,
   });
+//aca añadir dotenv
 const appTitle = "Cat Apps";
 
 const Home = Loader(() => import("./components/home/Home"));
 const Cats = Loader(() => import("./components/cats/Cats"));
+const Counter = Loader(() => import("./components/counter/Counter"));
 function App(props) {
   // eslint-disable-next-line
   const { counter, increment, decrement, setter } = props;
@@ -28,6 +30,7 @@ function App(props) {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/cats" component={Cats} />
+            <Route exact path="/counter" component={Counter} />
           </Switch>
         </Container>
       </div>
@@ -42,6 +45,7 @@ function App(props) {
   );
 }
 
+//Ver donde podemos llevar estas dos functionez
 //esta funcion se encarga de pasar el estado de la store como props de componentes
 //y esto se logra creando una funcion que devuelve un objeto
 const mapStateToProps = (state) => {
