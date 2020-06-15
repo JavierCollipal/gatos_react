@@ -7,7 +7,6 @@ import Loadable from "react-loadable";
 import { connect } from "react-redux";
 import { increment, decrement, setter } from "./reducers";
 import Counter from "./components/counter/Counter";
-import CounterButtons from "./components/counter/CounterButtons";
 
 const Loader = (x) =>
   Loadable({
@@ -19,8 +18,8 @@ const appTitle = "Cat Apps";
 const Home = Loader(() => import("./components/home/Home"));
 const Cats = Loader(() => import("./components/cats/Cats"));
 function App(props) {
+  // eslint-disable-next-line
   const { counter, increment, decrement, setter } = props;
-  console.log(`este es el setter ${setter}`);
   return (
     <div className="App">
       <NabVar title={appTitle} />
@@ -33,26 +32,30 @@ function App(props) {
         </Container>
       </div>
       <div>
-        <Counter counter={counter} />
-        <CounterButtons increment={increment} decrement={decrement} />
+        <Counter
+          counter={counter}
+          increment={increment}
+          decrement={decrement}
+        />
       </div>
     </div>
   );
 }
 
-//estudiar
 //esta funcion se encarga de pasar el estado de la store como props de componentes
+//y esto se logra creando una funcion que devuelve un objeto
 const mapStateToProps = (state) => {
   console.log(`este es el estado de mapStateToProps ${state}`);
   return { counter: state };
 };
-//estudiar
+
 //esta funcion se encarga de pasar las acciones de la store como props de componentes
+//y esto se logra creando una funcion que devuelve un objeto
 const mapDispatchToProps = (dispatch) => ({
-  increment: () => dispatch(increment),
-  decrement: () => dispatch(decrement),
+  increment: () => dispatch(increment()),
+  decrement: () => dispatch(decrement()),
   //un setter seria el equivalente a una mutaction en vue
-  setter: (payload) => dispatch(setter),
+  setter: (payload) => dispatch(setter()),
 });
 //connect es una funcion curryng que se encarga de devolver a app pero con los estados y acciones mapeados
 export default connect(mapStateToProps, mapDispatchToProps)(App);
