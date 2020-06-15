@@ -16,7 +16,6 @@ const initialState = 0;
 //REDUCER
 //Siempre tiene que retornar estados inmutables
 export default function (state = initialState, action) {
-  console.log(`este es el action type que esta llegando ${action.type}`);
   switch (action.type) {
     case INCREMENT:
       return state + 1;
