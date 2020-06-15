@@ -25,6 +25,6 @@ export default function (state = initialState, action) {
     case SETTER:
       return action.payload;
     default:
-      break;
+      return state;
   }
 }
