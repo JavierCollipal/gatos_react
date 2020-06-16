@@ -27,10 +27,10 @@ const catReducer = (state = initialState, action) => {
     case ADD:
       return state.concat(action.payload);
     case DELETE:
-      const findCatIndex = state.find((cat) => cat.id === action.payload);
-      return state;
+      const catIndex = state.find((cat) => cat.id === action.payload);
+      return state.splice(catIndex, 1);
     case FETCH:
-      return state.concat(...catData);
+      return [...state, ...catData];
     case SETTER:
       return state;
     default:
