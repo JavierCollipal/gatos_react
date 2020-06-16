@@ -3,7 +3,7 @@ import { Box } from "@material-ui/core";
 import CounterDisplay from "./CounterDisplay";
 import CounterButtons from "./CounterButtons";
 import { connect } from "react-redux";
-import { decrement, increment, setter } from "../../reducers";
+import { decrement, increment, setter } from "../../reducers/counter";
 //Aqui vamos a mover la store de counter
 //de alguna forma tenemos que lograr que la store de counter se declare en este lado
 //para esto podemos apoyarnos de react-redux y connect
@@ -19,7 +19,8 @@ const Counter = ({ counter, increment, decrement }) => {
 //esta funcion se encarga de pasar el estado de la store como props de componentes
 //y esto se logra creando una funcion que devuelve un objeto
 const mapStateToProps = (state) => {
-  return { counter: state };
+  const { counter } = state;
+  return { counter };
 };
 
 //esta funcion se encarga de pasar las acciones de la store como props de componentes

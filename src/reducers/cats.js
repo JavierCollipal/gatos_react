@@ -1,37 +1,33 @@
 //ACTION TYPES
+import { catData } from "../utils/mock/cats";
+
 const ADD = "CAT/ADD";
 const DELETE = "CAT/DELETE";
 const FETCH = "CAT/FETCH";
 const SETTER = "CAT/SETTER";
+
 //ACTION CREATORS
-export const addCat = () => ({ type: ADD });
-export const deleteCat = () => ({ type: DELETE });
+//funciones que hacen dispatch de una action de manera mas simple
+export const addCat = (payload) => ({ type: ADD, payload });
+export const deleteCat = (id) => ({ type: DELETE, id });
 export const fetchCat = () => ({ type: FETCH });
 
-//ACTION SETTER
 export const setter = (payload) => ({
   type: SETTER,
   payload,
 });
 
 //extra
-const mockCat = () => ({
-  id: Date.now(),
-  name: "lanita",
-  age: 1,
-  breed: "angora",
-  imageUrl:
-    "https://pbs.twimg.com/profile_images/378800000466242036/54d24bd84122f283eeabb0608e629f2b.jpeg",
-});
-const catData = [mockCat, mockCat];
 //STATE
 const initialState = [];
 //REDUCER
-export default function (state = initialState, action) {
+const catReducer = (state = initialState, action) => {
+  console.log("esta es la action de la store", action);
   switch (action.type) {
     case ADD:
-      return state.concat(mockCat);
+      return state.concat(action.payload);
     case DELETE:
+      const findCatIndex = state.find((cat) => cat.id === action.payload);
       return state;
     case FETCH:
       return state.concat(...catData);
@@ -40,4 +36,6 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default catReducer;

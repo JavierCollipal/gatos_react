@@ -3,14 +3,8 @@ import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import NabVar from "./components/ui/NabVar";
 import Container from "@material-ui/core/Container";
-import Loadable from "react-loadable";
+import Loader from "./libraries/loadable";
 
-//llevar esto a otro folder
-const Loader = (x) =>
-  Loadable({
-    loading: () => "Cargando...",
-    loader: x,
-  });
 //aca añadir dotenv
 const appTitle = "Cat Apps";
 
@@ -18,7 +12,6 @@ const Home = Loader(() => import("./components/home/Home"));
 const Cats = Loader(() => import("./components/cats/Cats"));
 const Counter = Loader(() => import("./components/counter/Counter"));
 function App() {
-  // eslint-disable-next-line
   return (
     <div className="App">
       <NabVar title={appTitle} />
