@@ -20,14 +20,19 @@ const NabVar = ({ title }) => {
             <Grid item>
               <Typography variant="h6">{title}</Typography>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item>
               <Link to="/" className={classes.link}>
                 Home
               </Link>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item>
               <Link to="/cats" className={classes.link}>
                 cats
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link to="/counter" className={classes.link}>
+                counter
               </Link>
             </Grid>
           </Grid>

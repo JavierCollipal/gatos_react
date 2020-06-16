@@ -1,15 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { combineReducers, createStore } from "redux";
+import counterReducer from "./reducers/counter";
+import catReducer from "./reducers/cats";
+
+//Si queremos usar 2 o mas reducers, podemos lograrlo con esta funcion llamada combineReducers
+//Con esta funcion crearemos un objeto que tendra como propiedades a mas reducers disponibles
+const reducer = combineReducers({ counter: counterReducer, cats: catReducer });
+const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
