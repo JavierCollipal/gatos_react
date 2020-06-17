@@ -22,7 +22,6 @@ export const setter = (payload) => ({
 const initialState = [];
 //REDUCER
 const catReducer = (state = initialState, action) => {
-  console.log("esta es la action de la store", action);
   switch (action.type) {
     case ADD:
       return state.concat(action.payload);
