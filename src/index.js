@@ -8,10 +8,15 @@ import * as serviceWorker from "./serviceWorker";
 import { combineReducers, createStore } from "redux";
 import counterReducer from "./reducers/counter";
 import catReducer from "./reducers/cats";
+import { reducer as formReducer } from "redux-form";
 
 //Si queremos usar 2 o mas reducers, podemos lograrlo con esta funcion llamada combineReducers
 //Con esta funcion crearemos un objeto que tendra como propiedades a mas reducers disponibles
-const reducer = combineReducers({ counter: counterReducer, cats: catReducer });
+const reducer = combineReducers({
+  counter: counterReducer,
+  cats: catReducer,
+  form: formReducer,
+});
 const store = createStore(reducer);
 
 ReactDOM.render(

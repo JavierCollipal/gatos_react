@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import { addCat, fetchCat, deleteCat } from "../../reducers/cats";
 import { mockCatFactory } from "../../utils/mock/cats";
+import CatForm from "./CatForm";
 
 const Cats = ({ cats, addCat, fetchCat, deleteCat }) => {
   const [selectedCat, setSelectedCat] = useState({});
@@ -46,6 +47,7 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat }) => {
             modalState={modal}
             deleteCat={handleDelete}
           />
+          <CatForm />
         </Grid>
       </Grid>
     </Box>
