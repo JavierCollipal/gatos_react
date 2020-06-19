@@ -23,7 +23,7 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat }) => {
     manageModal(false);
   };
   const handleFormSubmit = (payload) => {
-    payload.id = Date.now();
+    payload.id = Math.floor(Math.random());
     payload.imageUrl = defaultCatImg;
     addCat(payload);
   };
@@ -48,12 +48,11 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat }) => {
     </Box>
   );
 };
-
+//esta funcion se encarga de pasar el estado que necesitamos como props
 const mapStateToProps = (state) => {
   const { cats } = state;
   return { cats };
 };
-
 //esta funcion se encarga de pasar las acciones de la store como props de componentes
 //y esto se logra creando una funcion que devuelve un objeto
 const mapDispatchToProps = (dispatch) => ({
