@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import CatTable from "./CatTable";
 import CatModal from "./CatModal";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import { addCat, fetchCat, deleteCat } from "../../reducers/cats";
-import { mockCatFactory } from "../../utils/mock/cats";
 import CatForm from "./CatForm";
+import { defaultCatImg } from "../../utils/mock/cats";
 
 const Cats = ({ cats, addCat, fetchCat, deleteCat }) => {
   const [selectedCat, setSelectedCat] = useState({});
@@ -18,24 +17,20 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat }) => {
     setSelectedCat(cat);
     manageModal(true);
   };
-  const handleAdd = () => {
-    //aqui vamos a llamar al dispatch de add
-    let temporalCat = mockCatFactory("lanita", 6, "angora");
-    addCat(temporalCat);
-  };
   const handleDelete = (catId) => {
     //aqui vamos a llamar al dispatch de delete
     deleteCat(catId);
     manageModal(false);
   };
-
+  const handleFormSubmit = (payload) => {
+    payload.id = Date.now();
+    payload.imageUrl = defaultCatImg;
+    addCat(payload);
+  };
   return (
     <Box>
       <Grid container>
         <Grid item xs={12}>
-          <Button onClick={() => handleAdd()}>
-            Agregar un gato de manera inmutable
-          </Button>
           <CatTable
             title={"tabla de gatos"}
             cats={cats}
@@ -47,7 +42,7 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat }) => {
             modalState={modal}
             deleteCat={handleDelete}
           />
-          <CatForm />
+          <CatForm onSubmit={handleFormSubmit} />
         </Grid>
       </Grid>
     </Box>

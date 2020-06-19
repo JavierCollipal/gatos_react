@@ -24,7 +24,7 @@ const initialState = [];
 const catReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD:
-      return state.concat(action.payload);
+      return [...state, action.payload];
     case DELETE:
       const catIndex = state.find((cat) => cat.id === action.payload);
       return state.splice(catIndex, 1);
