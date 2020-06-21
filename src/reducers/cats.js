@@ -25,7 +25,6 @@ const catReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD:
       const { payload } = action;
-      console.log(payload);
       const newCat = Object.assign(payload, {
         id: Date.now(),
         imageUrl: defaultCatImg || payload.imageUrl,

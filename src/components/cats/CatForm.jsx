@@ -4,6 +4,7 @@ import CustomField from "../ui/CustomField";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 
 const validate = (values) => {
@@ -33,7 +34,7 @@ const CatForm = ({ handleSubmit, manageDialog, dialogState }) => {
       </DialogTitle>
 
       <DialogContent>
-        <form onSubmit={handleSubmit}>
+        <form>
           <Field
             name="name"
             component={CustomField}
@@ -55,9 +56,16 @@ const CatForm = ({ handleSubmit, manageDialog, dialogState }) => {
             title="Raza"
             type="text"
           />
-          <input type="submit" value="enviar gato" />
         </form>
       </DialogContent>
+      <DialogActions>
+        <Button onClick={() => manageDialog(false)} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={handleSubmit} color="primary">
+          Crear Gato/Actualizar Gato
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };
