@@ -1,5 +1,5 @@
 //ACTION TYPES
-import { catData } from "../utils/mock/cats";
+import { catData, defaultCatImg } from "../utils/mock/cats";
 
 const ADD = "CAT/ADD";
 const DELETE = "CAT/DELETE";
@@ -24,7 +24,13 @@ const initialState = [];
 const catReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD:
-      return [...state, action.payload];
+      const { payload } = action;
+      const newCat = Object.assign(payload, {
+        id: Date.now(),
+        imageUrl: defaultCatImg || payload.imageUrl,
+      });
+      console.log(newCat);
+      return [...state, newCat];
     case DELETE:
       const catIndex = state.find((cat) => cat.id === action.payload);
       return state.splice(catIndex, 1);
