@@ -1,6 +1,10 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import CustomField from "../ui/CustomField";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import Dialog from "@material-ui/core/Dialog";
 
 const validate = (values) => {
   const errors = {};
@@ -17,33 +21,44 @@ const validate = (values) => {
   return errors;
 };
 
-const CatForm = (props) => {
-  const { handleSubmit } = props;
+const CatForm = ({ handleSubmit, manageDialog, dialogState }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <Field
-        name="name"
-        component={CustomField}
-        placeholder="Nombre"
-        title="Nombre"
-        type="text"
-      />
-      <Field
-        name="age"
-        component={CustomField}
-        placeholder="Edad"
-        title="Edad"
-        type="number"
-      />
-      <Field
-        name="breed"
-        component={CustomField}
-        placeholder="Raza"
-        title="Raza"
-        type="text"
-      />
-      <input type="submit" value="enviar gato" />
-    </form>
+    <Dialog
+      open={dialogState}
+      onClose={() => manageDialog(false)}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogTitle id="form-dialog-title">
+        Crear gato/actualizar gato
+      </DialogTitle>
+
+      <DialogContent>
+        <form onSubmit={handleSubmit}>
+          <Field
+            name="name"
+            component={CustomField}
+            placeholder="Nombre"
+            title="Nombre"
+            type="text"
+          />
+          <Field
+            name="age"
+            component={CustomField}
+            placeholder="Edad"
+            title="Edad"
+            type="number"
+          />
+          <Field
+            name="breed"
+            component={CustomField}
+            placeholder="Raza"
+            title="Raza"
+            type="text"
+          />
+          <input type="submit" value="enviar gato" />
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

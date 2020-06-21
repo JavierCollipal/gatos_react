@@ -25,11 +25,12 @@ const catReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD:
       const { payload } = action;
+      console.log(payload);
       const newCat = Object.assign(payload, {
         id: Date.now(),
         imageUrl: defaultCatImg || payload.imageUrl,
       });
-      console.log(newCat);
+
       return [...state, newCat];
     case DELETE:
       const catIndex = state.find((cat) => cat.id === action.payload);

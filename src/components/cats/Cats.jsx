@@ -1,40 +1,36 @@
 import React, { useState } from "react";
 import CatTable from "./CatTable";
-import CatModal from "./CatModal";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { connect } from "react-redux";
 import { addCat, fetchCat, deleteCat } from "../../reducers/cats";
+import CatForm from "./CatForm";
 
 const Cats = ({ cats, addCat, fetchCat, deleteCat }) => {
   const [selectedCat, setSelectedCat] = useState({});
-  const [modal, setModal] = useState(false);
+  const [dialog, setDialog] = useState(false);
 
-  const manageModal = (change) => setModal(change);
+  const manageDialog = (change) => setDialog(change);
   const handleUpdateModal = (cat) => {
     setSelectedCat(cat);
-    manageModal(true);
+    manageDialog(true);
   };
   const handleDelete = (catId) => {
     //aqui vamos a llamar al dispatch de delete
     deleteCat(catId);
-    manageModal(false);
+    manageDialog(false);
   };
   const handleFormSubmit = (payload) => {
+    manageDialog(false);
     addCat(payload);
   };
   return (
     <Box>
       <Grid container>
         <Grid item xs={12}>
-          <Button color="primary" onClick={() => manageModal(true)}>
+          <Button color="primary" onClick={() => manageDialog(true)}>
             Añade un nuevo gato
           </Button>
           <CatTable
@@ -42,28 +38,11 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat }) => {
             cats={cats}
             handleUpdateModal={handleUpdateModal}
           />
-          <Dialog
-            open={modal}
-            onClose={() => manageModal(false)}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Crear gato</DialogTitle>
-            <DialogContent>
-              <CatModal
-                cat={selectedCat}
-                manageModal={manageModal}
-                modalState={modal}
-                deleteCat={handleDelete}
-                onSubmit={handleFormSubmit}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => manageModal(false)} color="primary">
-                Cerrar
-              </Button>
-              <Button color="primary">Crear</Button>
-            </DialogActions>
-          </Dialog>
+          <CatForm
+            onSubmit={handleFormSubmit}
+            manageDialog={manageDialog}
+            dialogState={dialog}
+          />
         </Grid>
       </Grid>
     </Box>
