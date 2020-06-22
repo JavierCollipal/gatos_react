@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import CatTable from "./CatTable";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { addCat, fetchCat, deleteCat, updateCat } from "../../reducers/cats";
 import CatForm from "./CatForm";
+import CatList from "./CatList";
 
 const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
   const [formData, setformData] = useState({});
@@ -21,7 +21,6 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
   const handleDelete = (catId) => {
     //aqui vamos a llamar al dispatch de delete
     deleteCat(catId);
-    manageDialog(false);
   };
   const handleCreate = () => {
     manageDialog(true);
@@ -38,11 +37,13 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
           Añade un nuevo gato
         </Button>
         <Grid item xs={12}>
-          <CatTable
-            title={"tabla de gatos"}
+          <CatList
             cats={cats}
-            handleUpdateModal={handleUpdateModal}
+            deleteCat={deleteCat}
+            manageModal={handleDelete}
           />
+        </Grid>
+        <Grid item xs={12}>
           <CatForm
             onSubmit={handleFormSubmit}
             manageDialog={manageDialog}

@@ -29,8 +29,7 @@ const catReducer = (state = initialState, action) => {
 
       return [...state, newCat];
     case DELETE:
-      const catIndex = state.find((cat) => cat.id === action.payload);
-      return state.splice(catIndex, 1);
+      return state.filter((cat) => cat.id !== action.id);
     case UPDATE:
       return updateObjectInArray(state, action);
     case FETCH:

@@ -3,7 +3,6 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
-import CatForm from "./CatForm";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -40,21 +39,11 @@ const CatCard = ({ cat, deleteCat, manageModal }) => {
             </Grid>
           </Grid>
         </CardContent>
-        <CatForm />
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Guardar
-        </Button>
-        <Button
-          size="small"
-          color="secondary"
-          onClick={() => deleteCat(cat.id)}
-        >
+        <Button size="small">Actualizar</Button>
+        <Button size="small" onClick={() => deleteCat(cat.id)}>
           Eliminar
-        </Button>
-        <Button size="small" color="primary" onClick={() => manageModal(false)}>
-          Cancelar
         </Button>
       </CardActions>
     </Card>
