@@ -25,7 +25,8 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
     setUpdateMode(false);
   };
   const handleFormSubmit = (payload) => {
-    console.log(payload);
+    //arreglo momentaneo para el error de redux-form(initialValues no esta pasando la id si es update)
+    if (updateMode) payload.id = formData.id;
     manageDialog(false);
     updateMode ? updateCat(payload) : addCat(payload);
   };
