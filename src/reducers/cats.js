@@ -34,7 +34,7 @@ const catReducer = (state = initialState, action) => {
     case UPDATE:
       return updateObjectInArray(state, action);
     case FETCH:
-      return [...state, ...catData];
+      return [...catData];
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { addCat, fetchCat, deleteCat, updateCat } from "../../reducers/cats";
@@ -29,6 +29,14 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
     manageDialog(false);
     updateMode ? updateCat(payload) : addCat(payload);
   };
+
+  useEffect(() => {
+    console.log("trigger al hook de efecto como si fuera componentDidMount");
+    fetchCat();
+  }, [fetchCat]);
+  useEffect(() => {
+    console.log("cambio el props de gatos");
+  }, [cats]);
   return (
     <div>
       <Button color="primary" onClick={handleCreate}>
