@@ -6,7 +6,6 @@ const ADD = "CAT/ADD";
 const DELETE = "CAT/DELETE";
 const UPDATE = "CAT/UPDATE";
 const FETCH = "CAT/FETCH";
-const SETTER = "CAT/SETTER";
 
 //ACTION CREATORS
 //funciones que hacen dispatch de una action de manera mas simple
@@ -34,8 +33,6 @@ const catReducer = (state = initialState, action) => {
       return updateObjectInArray(state, action);
     case FETCH:
       return [...state, ...catData];
-    case SETTER:
-      return state;
     default:
       return state;
   }

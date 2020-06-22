@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { addCat, fetchCat, deleteCat, updateCat } from "../../reducers/cats";
@@ -12,14 +10,13 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
   const [dialog, setDialog] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
   const manageDialog = (change) => setDialog(change);
-  const handleUpdateModal = (cat) => {
+  const handleUpdate = (cat) => {
     setformData(cat);
     setUpdateMode(true);
     //ver como pasarle los valores a form redux para actualizar el gato
     manageDialog(true);
   };
   const handleDelete = (catId) => {
-    //aqui vamos a llamar al dispatch de delete
     deleteCat(catId);
   };
   const handleCreate = () => {
@@ -31,29 +28,23 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
     updateMode ? updateCat(payload) : addCat(payload);
   };
   return (
-    <Box>
-      <Grid container>
-        <Button color="primary" onClick={handleCreate}>
-          Añade un nuevo gato
-        </Button>
-        <Grid item xs={12}>
-          <CatList
-            cats={cats}
-            deleteCat={deleteCat}
-            manageModal={handleDelete}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <CatForm
-            onSubmit={handleFormSubmit}
-            manageDialog={manageDialog}
-            dialogState={dialog}
-            updateMode={updateMode}
-            initialValues={formData}
-          />
-        </Grid>
-      </Grid>
-    </Box>
+    <div>
+      <Button color="primary" onClick={handleCreate}>
+        Añade un nuevo gato
+      </Button>
+      <CatList
+        cats={cats}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+      />
+      <CatForm
+        onSubmit={handleFormSubmit}
+        manageDialog={manageDialog}
+        dialogState={dialog}
+        updateMode={updateMode}
+        initialValues={formData}
+      />
+    </div>
   );
 };
 //esta funcion se encarga de pasar el estado que necesitamos como props

@@ -1,20 +1,22 @@
 import React from "react";
-import GridList from "@material-ui/core/GridList";
+import Grid from "@material-ui/core/Grid";
 import CatCard from "./CatCard";
 
-const CatList = ({ cats, deleteCat, manageModal }) => {
+const CatList = ({ cats, handleDelete, handleUpdate }) => {
+  const cardsArray = cats.map((cat, index) => (
+    <Grid item xs={4}>
+      <CatCard
+        cat={cat}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+        key={index}
+      />
+    </Grid>
+  ));
   return (
-    <GridList cols={3} spacing={4}>
-      {cats.map((cat, index) => (
-        <CatCard
-          cat={cat}
-          deleteCat={deleteCat}
-          manageModal={manageModal}
-          key={index}
-          spacing={2}
-        />
-      ))}
-    </GridList>
+    <Grid container spacing={1}>
+      {cardsArray}
+    </Grid>
   );
 };
 
