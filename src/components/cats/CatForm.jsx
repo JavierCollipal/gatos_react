@@ -22,48 +22,51 @@ const validate = (values) => {
   return errors;
 };
 
-const CatForm = ({ handleSubmit, manageDialog, dialogState }) => {
+const CatForm = ({ handleSubmit, manageDialog, dialogState, updateMode }) => {
+  const dialogTitle = updateMode ? "Actualizar gato" : "Crear gato";
   return (
     <Dialog
       open={dialogState}
       onClose={() => manageDialog(false)}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">
-        Crear gato/actualizar gato
-      </DialogTitle>
+      <DialogTitle id="form-dialog-title">{dialogTitle}</DialogTitle>
 
       <DialogContent>
-        <form>
-          <Field
-            name="name"
-            component={CustomField}
-            placeholder="Nombre"
-            title="Nombre"
-            type="text"
-          />
-          <Field
-            name="age"
-            component={CustomField}
-            placeholder="Edad"
-            title="Edad"
-            type="number"
-          />
-          <Field
-            name="breed"
-            component={CustomField}
-            placeholder="Raza"
-            title="Raza"
-            type="text"
-          />
-        </form>
+        {updateMode ? (
+          "este es el update mode de cat"
+        ) : (
+          <form>
+            <Field
+              name="name"
+              component={CustomField}
+              placeholder="Nombre"
+              title="Nombre"
+              type="text"
+            />
+            <Field
+              name="age"
+              component={CustomField}
+              placeholder="Edad"
+              title="Edad"
+              type="number"
+            />
+            <Field
+              name="breed"
+              component={CustomField}
+              placeholder="Raza"
+              title="Raza"
+              type="text"
+            />
+          </form>
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={() => manageDialog(false)} color="primary">
           Cancelar
         </Button>
         <Button onClick={handleSubmit} color="primary">
-          Crear Gato/Actualizar Gato
+          {dialogTitle}
         </Button>
       </DialogActions>
     </Dialog>

@@ -3,6 +3,7 @@ import { catData, defaultCatImg } from "../utils/mock/cats";
 
 const ADD = "CAT/ADD";
 const DELETE = "CAT/DELETE";
+const UPDATE = "CAT/UPDATE";
 const FETCH = "CAT/FETCH";
 const SETTER = "CAT/SETTER";
 
@@ -11,11 +12,7 @@ const SETTER = "CAT/SETTER";
 export const addCat = (payload) => ({ type: ADD, payload });
 export const deleteCat = (id) => ({ type: DELETE, id });
 export const fetchCat = () => ({ type: FETCH });
-
-export const setter = (payload) => ({
-  type: SETTER,
-  payload,
-});
+export const updateCat = (payload) => ({ type: UPDATE, payload });
 
 //extra
 //STATE
@@ -24,16 +21,21 @@ const initialState = [];
 const catReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD:
-      const { payload } = action;
-      const newCat = Object.assign(payload, {
+      const newCat = Object.assign(action.payload, {
         id: Date.now(),
-        imageUrl: defaultCatImg || payload.imageUrl,
+        imageUrl: defaultCatImg || action.payload.imageUrl,
       });
 
       return [...state, newCat];
     case DELETE:
       const catIndex = state.find((cat) => cat.id === action.payload);
       return state.splice(catIndex, 1);
+    case UPDATE:
+      const updatedCat = Object.assign(action.payload, {
+        id: Date.now(),
+        imageUrl: defaultCatImg || action.payload.imageUrl,
+      });
+      return [...state, updatedCat];
     case FETCH:
       return [...state, ...catData];
     case SETTER:
