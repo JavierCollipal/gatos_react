@@ -32,7 +32,6 @@ const catReducer = (state = initialState, action) => {
       const catIndex = state.find((cat) => cat.id === action.payload);
       return state.splice(catIndex, 1);
     case UPDATE:
-      console.log(action);
       return updateObjectInArray(state, action);
     case FETCH:
       return [...state, ...catData];
