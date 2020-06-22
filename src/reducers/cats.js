@@ -1,5 +1,6 @@
 //ACTION TYPES
 import { catData, defaultCatImg } from "../utils/mock/cats";
+import updateObjectInArray from "../utils/functions/Arrays/updateObjectInArray";
 
 const ADD = "CAT/ADD";
 const DELETE = "CAT/DELETE";
@@ -31,11 +32,8 @@ const catReducer = (state = initialState, action) => {
       const catIndex = state.find((cat) => cat.id === action.payload);
       return state.splice(catIndex, 1);
     case UPDATE:
-      const updatedCat = Object.assign(action.payload, {
-        id: Date.now(),
-        imageUrl: defaultCatImg || action.payload.imageUrl,
-      });
-      return [...state, updatedCat];
+      console.log(action);
+      return updateObjectInArray(state, action);
     case FETCH:
       return [...state, ...catData];
     case SETTER:
