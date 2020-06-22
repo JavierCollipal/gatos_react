@@ -1,21 +1,18 @@
 //ACTION TYPES
-import { catData } from "../utils/mock/cats";
+import { catData, defaultCatImg } from "../utils/mock/cats";
+import updateObjectInArray from "../utils/functions/Arrays/updateObjectInArray";
 
 const ADD = "CAT/ADD";
 const DELETE = "CAT/DELETE";
+const UPDATE = "CAT/UPDATE";
 const FETCH = "CAT/FETCH";
-const SETTER = "CAT/SETTER";
 
 //ACTION CREATORS
 //funciones que hacen dispatch de una action de manera mas simple
 export const addCat = (payload) => ({ type: ADD, payload });
 export const deleteCat = (id) => ({ type: DELETE, id });
 export const fetchCat = () => ({ type: FETCH });
-
-export const setter = (payload) => ({
-  type: SETTER,
-  payload,
-});
+export const updateCat = (payload) => ({ type: UPDATE, payload });
 
 //extra
 //STATE
@@ -24,14 +21,20 @@ const initialState = [];
 const catReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD:
-      return state.concat(action.payload);
+      const newCat = {
+        ...action.payload,
+        ...{
+          id: Date.now(),
+          imageUrl: defaultCatImg || action.payload.imageUrl,
+        },
+      };
+      return [...state, newCat];
     case DELETE:
-      const catIndex = state.find((cat) => cat.id === action.payload);
-      return state.splice(catIndex, 1);
+      return state.filter((cat) => cat.id !== action.id);
+    case UPDATE:
+      return updateObjectInArray(state, action);
     case FETCH:
       return [...state, ...catData];
-    case SETTER:
-      return state;
     default:
       return state;
   }
