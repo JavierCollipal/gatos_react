@@ -6,12 +6,13 @@ import CatForm from "./CatForm";
 import CatList from "./CatList";
 
 const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
-  const [formData, setformData] = useState({});
+  const [formData, setFormData] = useState({});
   const [dialog, setDialog] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
   const manageDialog = (change) => setDialog(change);
   const handleUpdate = (cat) => {
-    setformData(cat);
+    console.log(cat);
+    setFormData(cat);
     setUpdateMode(true);
     //ver como pasarle los valores a form redux para actualizar el gato
     manageDialog(true);
@@ -24,6 +25,7 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
     setUpdateMode(false);
   };
   const handleFormSubmit = (payload) => {
+    console.log(payload);
     manageDialog(false);
     updateMode ? updateCat(payload) : addCat(payload);
   };

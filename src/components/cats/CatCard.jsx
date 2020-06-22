@@ -32,13 +32,16 @@ const CatCard = ({ cat, handleDelete, handleUpdate }) => {
         <CardContent>
           <Grid container>
             <Grid item xs>
-              {cat.name}
+              Nombre: {cat.name}
             </Grid>
             <Grid item xs>
-              {cat.breed}
+              Raza: {cat.breed}
             </Grid>
             <Grid item xs>
-              {cat.age}
+              Edad: {cat.age}
+            </Grid>
+            <Grid item xs>
+              Id: {cat.id}
             </Grid>
           </Grid>
         </CardContent>

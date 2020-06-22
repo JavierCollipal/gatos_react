@@ -21,11 +21,13 @@ const initialState = [];
 const catReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD:
-      const newCat = Object.assign(action.payload, {
-        id: Date.now(),
-        imageUrl: defaultCatImg || action.payload.imageUrl,
-      });
-
+      const newCat = {
+        ...action.payload,
+        ...{
+          id: Date.now(),
+          imageUrl: defaultCatImg || action.payload.imageUrl,
+        },
+      };
       return [...state, newCat];
     case DELETE:
       return state.filter((cat) => cat.id !== action.id);
