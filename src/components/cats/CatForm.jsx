@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import CustomField from "../ui/CustomField";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -33,40 +33,35 @@ const CatForm = ({ handleSubmit, manageDialog, dialogState, updateMode }) => {
       <DialogTitle id="form-dialog-title">{dialogTitle}</DialogTitle>
 
       <DialogContent>
-        {updateMode ? (
-          "este es el update mode de cat"
-        ) : (
-          <form>
-
-            <Field
-              name="name"
-              component={CustomField}
-              placeholder="Nombre"
-              title="Nombre:"
-              type="text"
-            />
-            <Field
-              name="age"
-              component={CustomField}
-              placeholder="Edad"
-              title="Edad"
-              type="number"
-            />
-            <Field
-              name="breed"
-              component={CustomField}
-              placeholder="Raza"
-              title="Raza"
-              type="text"
-            />
-          </form>
-        )}
+        <form>
+          <Field
+            name="name"
+            component={CustomField}
+            placeholder="Nombre"
+            title="Nombre:"
+            type="text"
+          />
+          <Field
+            name="age"
+            component={CustomField}
+            placeholder="Edad"
+            title="Edad"
+            type="number"
+          />
+          <Field
+            name="breed"
+            component={CustomField}
+            placeholder="Raza"
+            title="Raza"
+            type="text"
+          />
+        </form>
       </DialogContent>
       <DialogActions>
         <Button onClick={() => manageDialog(false)} color="primary">
           Cancelar
         </Button>
-        <Button onClick={handleSubmit} color="primary">
+        <Button onClick={() => handleSubmit()} color="primary">
           {dialogTitle}
         </Button>
       </DialogActions>

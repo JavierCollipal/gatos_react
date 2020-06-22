@@ -3,19 +3,17 @@ import CatTable from "./CatTable";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-
 import { connect } from "react-redux";
 import { addCat, fetchCat, deleteCat, updateCat } from "../../reducers/cats";
 import CatForm from "./CatForm";
-import CatCard from "./CatCard";
 
 const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
-  const [selectedCat, setSelectedCat] = useState({});
+  const [formData, setformData] = useState({});
   const [dialog, setDialog] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
   const manageDialog = (change) => setDialog(change);
   const handleUpdateModal = (cat) => {
-    setSelectedCat(cat);
+    setformData(cat);
     setUpdateMode(true);
     //ver como pasarle los valores a form redux para actualizar el gato
     manageDialog(true);
@@ -36,10 +34,10 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
   return (
     <Box>
       <Grid container>
+        <Button color="primary" onClick={handleCreate}>
+          Añade un nuevo gato
+        </Button>
         <Grid item xs={12}>
-          <Button color="primary" onClick={handleCreate}>
-            Añade un nuevo gato
-          </Button>
           <CatTable
             title={"tabla de gatos"}
             cats={cats}
@@ -50,6 +48,7 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
             manageDialog={manageDialog}
             dialogState={dialog}
             updateMode={updateMode}
+            initialValues={formData}
           />
         </Grid>
       </Grid>
