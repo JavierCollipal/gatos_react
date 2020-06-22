@@ -37,11 +37,12 @@ const CatForm = ({ handleSubmit, manageDialog, dialogState, updateMode }) => {
           "este es el update mode de cat"
         ) : (
           <form>
+
             <Field
               name="name"
               component={CustomField}
               placeholder="Nombre"
-              title="Nombre"
+              title="Nombre:"
               type="text"
             />
             <Field
