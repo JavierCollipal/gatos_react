@@ -11,7 +11,6 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
   const [updateMode, setUpdateMode] = useState(false);
   const manageDialog = (change) => setDialog(change);
   const handleUpdate = (cat) => {
-    console.log(cat);
     setFormData(cat);
     setUpdateMode(true);
     //ver como pasarle los valores a form redux para actualizar el gato
