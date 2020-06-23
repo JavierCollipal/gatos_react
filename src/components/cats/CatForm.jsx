@@ -69,4 +69,8 @@ const CatForm = ({ handleSubmit, manageDialog, dialogState, updateMode }) => {
   );
 };
 
-export default reduxForm({ form: "CatForm", validate })(CatForm);
+export default reduxForm({
+  form: "CatForm",
+  validate,
+  enableReinitialize: true,
+})(CatForm);

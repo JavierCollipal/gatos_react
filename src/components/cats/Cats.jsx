@@ -6,9 +6,10 @@ import CatForm from "./CatForm";
 import CatList from "./CatList";
 
 const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState();
   const [dialog, setDialog] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
+
   const handleUpdate = (cat) => {
     setFormData(cat);
     setUpdateMode(true);
@@ -19,6 +20,7 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
     deleteCat(catId);
   };
   const handleCreate = () => {
+    setFormData(null);
     setDialog(true);
     setUpdateMode(false);
   };
