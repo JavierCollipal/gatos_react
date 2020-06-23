@@ -9,34 +9,32 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
   const [formData, setFormData] = useState({});
   const [dialog, setDialog] = useState(false);
   const [updateMode, setUpdateMode] = useState(false);
-  const manageDialog = (change) => setDialog(change);
   const handleUpdate = (cat) => {
     setFormData(cat);
     setUpdateMode(true);
     //ver como pasarle los valores a form redux para actualizar el gato
-    manageDialog(true);
+    setDialog(true);
   };
   const handleDelete = (catId) => {
     deleteCat(catId);
   };
   const handleCreate = () => {
-    manageDialog(true);
+    setDialog(true);
     setUpdateMode(false);
   };
   const handleFormSubmit = (payload) => {
     //arreglo momentaneo para el error de redux-form(initialValues no esta pasando la id si es update)
     if (updateMode) payload.id = formData.id;
-    manageDialog(false);
+    setDialog(false);
     updateMode ? updateCat(payload) : addCat(payload);
   };
 
+  //simulamos componentDidMount con un arreglo en blanco como segundo parametro,
+  //en este caso lleva la funcion fetchCat por recomendación del linter
   useEffect(() => {
-    console.log("trigger al hook de efecto como si fuera componentDidMount");
     fetchCat();
   }, [fetchCat]);
-  useEffect(() => {
-    console.log("cambio el props de gatos");
-  }, [cats]);
+
   return (
     <div>
       <Button color="primary" onClick={handleCreate}>
@@ -49,7 +47,7 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
       />
       <CatForm
         onSubmit={handleFormSubmit}
-        manageDialog={manageDialog}
+        manageDialog={setDialog}
         dialogState={dialog}
         updateMode={updateMode}
         initialValues={formData}
