@@ -1,7 +1,7 @@
-//ACTION TYPES
+import { v4 as uuidv4 } from "uuid";
 import { catData, defaultCatImg } from "../utils/mock/cats";
 import updateObjectInArray from "../utils/functions/Arrays/updateObjectInArray";
-
+//ACTION TYPES
 const ADD = "CAT/ADD";
 const DELETE = "CAT/DELETE";
 const UPDATE = "CAT/UPDATE";
@@ -24,7 +24,7 @@ const catReducer = (state = initialState, action) => {
       const newCat = {
         ...action.payload,
         ...{
-          id: Date.now(),
+          id: uuidv4(),
           imageUrl: defaultCatImg || action.payload.imageUrl,
         },
       };

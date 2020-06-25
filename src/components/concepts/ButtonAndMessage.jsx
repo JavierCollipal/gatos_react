@@ -6,7 +6,7 @@ const ButtonAndMessage = () => {
   return (
     <div>
       <button onClick={() => setCount(count + 1)}>Aumentar estado</button>
-        <button onClick={() => setCount(count - 1)}>Disminuir estado</button>
+      <button onClick={() => setCount(count - 1)}>Disminuir estado</button>
       <p>{count} incremento total del estado</p>
     </div>
   );
