@@ -47,12 +47,18 @@ const CatCard = ({ cat, handleDelete, handleUpdate }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" onClick={() => handleUpdate(cat)}>
-          <CreateIcon />
-        </Button>
-        <Button size="small" onClick={() => handleDelete(cat.id)}>
-          <Delete />
-        </Button>
+        <Grid container>
+          <Grid item xs>
+            <Button size="small" onClick={() => handleUpdate(cat)}>
+              <CreateIcon />
+            </Button>
+          </Grid>
+          <Grid item xs>
+            <Button size="small" onClick={() => handleDelete(cat.id)}>
+              <Delete />
+            </Button>
+          </Grid>
+        </Grid>
       </CardActions>
     </Card>
   );
