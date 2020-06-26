@@ -1,9 +1,11 @@
 import React from "react";
+import Image from "material-ui-image";
 
-const BigImage = ({ message }) => {
+const BigImage = ({ message, src }) => {
   return (
     <div>
-      <p> {message}</p>
+      <p>{message}</p>
+      <Image src={src} />
     </div>
   );
 };
