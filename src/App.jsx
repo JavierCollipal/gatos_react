@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import NabVar from "./components/ui/NabVar";
-import Container from "@material-ui/core/Container";
 import Loader from "./libraries/loadable";
 
 //aca añadir dotenv
@@ -15,15 +14,11 @@ function App() {
   return (
     <div className="App">
       <NabVar title={appTitle} />
-      <div>
-        <Container>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/cats" component={Cats} />
-            <Route exact path="/counter" component={Counter} />
-          </Switch>
-        </Container>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/cats" component={Cats} />
+        <Route exact path="/counter" component={Counter} />
+      </Switch>
     </div>
   );
 }
