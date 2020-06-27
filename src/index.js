@@ -9,6 +9,7 @@ import { combineReducers, createStore } from "redux";
 import counterReducer from "./reducers/counter";
 import catReducer from "./reducers/cats";
 import { reducer as formReducer } from "redux-form";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 //Si queremos usar 2 o mas reducers, podemos lograrlo con esta funcion llamada combineReducers
 //Con esta funcion crearemos un objeto que tendra como propiedades a mas reducers disponibles
@@ -17,7 +18,7 @@ const reducer = combineReducers({
   cats: catReducer,
   form: formReducer,
 });
-const store = createStore(reducer);
+const store = createStore(reducer, composeWithDevTools());
 
 ReactDOM.render(
   <React.StrictMode>
