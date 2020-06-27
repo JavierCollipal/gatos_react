@@ -9,7 +9,6 @@ const DECREMENT = t("DECREMENT");
 const SETTER = t("SETTER");
 
 //ACTION CREATORS
-//MAC VERSION
 //Es una función que devuelve un objeto { type: ActionType },es útil para definir el tipo de
 //acción que queremos ejecutar en la store sin especificar un action type directamente.
 export const increment = mac(INCREMENT);

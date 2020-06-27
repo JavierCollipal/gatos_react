@@ -1,18 +1,22 @@
 import { v4 as uuidv4 } from "uuid";
 import { catData, defaultCatImg } from "../utils/mock/cats";
 import updateObjectInArray from "../utils/functions/Arrays/updateObjectInArray";
+import { makeType } from "../utils/functions/redux/makeType";
+import { mac } from "../utils/functions/redux/mac";
+const t = makeType("CAT");
 //ACTION TYPES
-const ADD = "CAT/ADD";
-const DELETE = "CAT/DELETE";
-const UPDATE = "CAT/UPDATE";
-const FETCH = "CAT/FETCH";
+const ADD = t("ADD");
+const DELETE = t("DELETE");
+const UPDATE = t("UPDATE");
+const FETCH = t("FETCH");
 
 //ACTION CREATORS
+//mac function used
 //funciones que hacen dispatch de una action de manera mas simple
-export const addCat = (payload) => ({ type: ADD, payload });
-export const deleteCat = (id) => ({ type: DELETE, id });
-export const fetchCat = () => ({ type: FETCH });
-export const updateCat = (payload) => ({ type: UPDATE, payload });
+export const addCat = mac(ADD, "payload");
+export const deleteCat = mac(DELETE, "id");
+export const fetchCat = mac(FETCH);
+export const updateCat = mac(UPDATE, "payload");
 
 //extra
 //STATE

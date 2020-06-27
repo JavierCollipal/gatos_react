@@ -40,9 +40,6 @@ const CatCard = ({ cat, handleDelete, handleUpdate }) => {
             <Grid item xs>
               Edad: {cat.age}
             </Grid>
-            <Grid item xs>
-              Id: {cat.id}
-            </Grid>
           </Grid>
         </CardContent>
       </CardActionArea>
