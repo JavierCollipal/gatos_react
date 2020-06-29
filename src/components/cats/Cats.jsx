@@ -59,7 +59,7 @@ const Cats = ({ cats, addCat, fetchCat, deleteCat, updateCat }) => {
 };
 //esta funcion se encarga de pasar el estado que necesitamos como props
 const mapStateToProps = (state) => {
-  const { cats } = state;
+  const cats = state.cats.data;
   return { cats };
 };
 //esta funcion se encarga de pasar las acciones de la store como props de componentes

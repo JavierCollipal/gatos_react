@@ -20,7 +20,10 @@ export const updateCat = mac(UPDATE, "payload");
 
 //extra
 //STATE
-const initialState = [];
+const initialState = {
+  data: [],
+  loading: false,
+};
 //REDUCER
 const catReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -32,15 +35,26 @@ const catReducer = (state = initialState, action) => {
           imageUrl: defaultCatImg || action.payload.imageUrl,
         },
       };
-      return [...state, newCat];
+      const newData = [...state.data, newCat];
+      return { ...state, ...{ data: newData } };
     case DELETE:
-      return state.filter((cat) => cat.id !== action.id);
+      return {
+        ...state,
+        ...{ data: state.data.filter((cat) => cat.id !== action.id) },
+      };
     case UPDATE:
-      return updateObjectInArray(state, action);
+      return {
+        ...state,
+        ...{ data: updateObjectInArray(state.data, action) },
+      };
     case FETCH:
-      return [...catData];
+      return {
+        ...state,
+        ...{ data: catData },
+      };
+
     default:
-      return state;
+      return { ...state };
   }
 };
 
