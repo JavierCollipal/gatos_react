@@ -4,9 +4,9 @@ import { mac } from "../utils/functions/redux/mac";
 const t = makeType("COUNTER");
 //ACTION TYPES
 //El tipo de acción que vamos a ejecutar en la store, es una variable string que almacena el tipo a usar en el case del reducer.
-const INCREMENT = t("INCREMENT");
-const DECREMENT = t("DECREMENT");
-const SETTER = t("SETTER");
+export const INCREMENT = t("INCREMENT");
+export const DECREMENT = t("DECREMENT");
+export const SETTER = t("SETTER");
 
 //ACTION CREATORS
 //Es una función que devuelve un objeto { type: ActionType },es útil para definir el tipo de
