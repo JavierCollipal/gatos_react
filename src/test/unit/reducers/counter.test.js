@@ -4,6 +4,7 @@ import {
   INCREMENT,
   DECREMENT,
 } from "../../../reducers/counter";
+import counterReducer from "../../../reducers/counter";
 
 //ACTION CREATOR TESTING
 //from testing redux docs link: https://redux.js.org/recipes/writing-tests
@@ -25,4 +26,17 @@ describe("actions creators testing", () => {
   });
 });
 
-//
+//REDUCER TESTING
+//A reducer should return the new state after applying the action to the previous state,
+//and that's the behavior tested below
+describe("counter reducer", () => {
+  it("should return the initial state", () => {
+    expect(counterReducer(undefined, {})).toEqual(0);
+  });
+  it("should handle  the INCREMENT action", () => {
+    expect(counterReducer(0, increment())).toEqual(1);
+  });
+  it("should handle  the DECREMENT action", () => {
+    expect(counterReducer(0, decrement())).toEqual(-1);
+  });
+});
