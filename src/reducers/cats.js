@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-import { defaultCatImg } from "../utils/mock/cats";
 import updateObjectInArray from "../utils/functions/Arrays/updateObjectInArray";
 import { makeType } from "../utils/functions/redux/makeType";
 import { mac } from "../utils/functions/redux/mac";
@@ -60,8 +58,6 @@ const catReducer = (state = initialState, action) => {
           ...state.data,
           {
             ...action.payload,
-            id: uuidv4(),
-            imageUrl: defaultCatImg || action.payload.imageUrl,
           },
         ],
       };

@@ -6,14 +6,12 @@ const t = makeType("COUNTER");
 //El tipo de acción que vamos a ejecutar en la store, es una variable string que almacena el tipo a usar en el case del reducer.
 export const INCREMENT = t("INCREMENT");
 export const DECREMENT = t("DECREMENT");
-export const SETTER = t("SETTER");
 
 //ACTION CREATORS
 //Es una función que devuelve un objeto { type: ActionType },es útil para definir el tipo de
 //acción que queremos ejecutar en la store sin especificar un action type directamente.
 export const increment = mac(INCREMENT);
 export const decrement = mac(DECREMENT);
-export const setter = mac(SETTER, "payload");
 
 //estado inicial de nuestro reducer
 const initialState = 0;
@@ -26,8 +24,6 @@ const counterReducer = (state = initialState, action) => {
       return state + 1;
     case DECREMENT:
       return state - 1;
-    case SETTER:
-      return action.payload;
     default:
       return state;
   }
