@@ -10,7 +10,7 @@ export const mockCatFactory = (id, name, age, breed, imageUrl) => ({
   imageUrl: imageUrl || defaultCatImg,
 });
 
-export const catData = [
+export const mockCatData = [
   mockCatFactory(uuidv4(), "lanita", 1, "angora"),
   mockCatFactory(uuidv4(), "esponjoso", 7, "angora"),
   mockCatFactory(uuidv4(), "serafina", 10, "angora"),

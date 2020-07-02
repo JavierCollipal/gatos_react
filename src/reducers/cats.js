@@ -10,10 +10,10 @@ const apiUrl =
 
 const t = makeType("CAT");
 //ACTION TYPES
-const ADD = t("ADD");
-const DELETE = t("DELETE");
-const UPDATE = t("UPDATE");
-const FETCH = t("FETCH");
+export const ADD = t("ADD");
+export const DELETE = t("DELETE");
+export const UPDATE = t("UPDATE");
+export const FETCH = t("FETCH");
 
 //ACTION CREATORS
 //mac function used
