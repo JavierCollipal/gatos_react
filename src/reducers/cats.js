@@ -44,7 +44,7 @@ export const fetchCatsAsync = () => {
 };
 //extra
 //STATE
-const initialState = {
+export const initialState = {
   data: [],
   loading: false,
   error: false,

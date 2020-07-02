@@ -7,6 +7,7 @@ import {
   deleteCat,
   updateCat,
   fetchCat,
+  initialState,
 } from "../../../reducers/cats";
 import catReducer from "../../../reducers/cats";
 import { mockCatData } from "../../../utils/mock/cats";
@@ -44,15 +45,8 @@ describe("actions creators testing", () => {
 });
 
 //REDUCER TESTING
-/*describe("cat reducer", () => {
-/*describe("cat reducer", () => {
+describe("cat reducer", () => {
   it("should return the initial state", () => {
-    expect(catReducer(undefined, {})).toEqual(0);
+    expect(catReducer(initialState, {})).toEqual(initialState);
   });
-  it("should handle  the INCREMENT action", () => {
-    expect(catReducer(0, increment())).toEqual(1);
-  });
-  it("should handle  the DECREMENT action", () => {
-    expect(catReducer(0, decrement())).toEqual(-1);
-  });
-});*/
+});
