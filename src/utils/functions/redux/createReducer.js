@@ -1,5 +1,5 @@
 //Function from redux docs, remember to comment it
-const createReducer = (initialState, actionHandlers) => {
+const createStoreReducer = (initialState, actionHandlers) => {
   //declaracion de un reducer
   return function reducer(state = initialState, action) {
     //investigar que pasa aca, ya que esto termina ejecutando las actions
@@ -15,4 +15,4 @@ const createReducer = (initialState, actionHandlers) => {
   };
 };
 
-export default createReducer;
+export default createStoreReducer;

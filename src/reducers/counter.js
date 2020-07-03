@@ -1,6 +1,6 @@
 import { makeType } from "../utils/functions/redux/makeType";
 import { mac } from "../utils/functions/redux/mac";
-import createReducer from "../utils/functions/redux/createReducer";
+import createStoreReducer from "../utils/functions/redux/createReducer";
 
 const t = makeType("COUNTER");
 //ACTION TYPES
@@ -19,7 +19,7 @@ export const initialState = 0;
 //REDUCER
 //Una función que intercepta cuando se hace dispatch de una acción y en base a su tipo actualiza el estado,
 //siempre se realiza de una manera inmutable.
-export default createReducer(initialState, {
+export default createStoreReducer(initialState, {
   [INCREMENT]: (state) => state + 1,
   [DECREMENT]: (state) => state - 1,
 });

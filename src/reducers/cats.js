@@ -1,14 +1,10 @@
 import updateObjectInArray from "../utils/functions/Arrays/updateObjectInArray";
 import { makeType } from "../utils/functions/redux/makeType";
 import { mac } from "../utils/functions/redux/mac";
-import axios from "axios";
 import catApi from "../api/cats";
-//recordar configurar axios en otra parte
-const apiUrl =
-  "https://my-json-server.typicode.com/JavierCollipal/json_cats/cats";
 
-const t = makeType("CAT");
 //ACTION TYPES
+const t = makeType("CAT");
 export const ADD = t("ADD");
 export const DELETE = t("DELETE");
 export const UPDATE = t("UPDATE");
@@ -69,7 +65,7 @@ const catReducer = (state = initialState, action) => {
     case UPDATE:
       return {
         ...state,
-        data: updateObjectInArray(state.data, action),
+        data: updateObjectInArray(state.data, action.payload),
       };
     case FETCH:
       return {
@@ -81,5 +77,24 @@ const catReducer = (state = initialState, action) => {
       return { ...state };
   }
 };
-
+//esta forma de usar el reducer todavia no esta disponible para cats,
+//ya que tiene un conflicto con redux-form
+/*const reducer = createStoreReducer(initialState, {
+  [ADD]: (state, { payload }) => ({
+    ...state,
+    data: [...state.data, payload],
+  }),
+  [DELETE]: (state, { id }) => ({
+    ...state,
+    data: state.data.filter((cat) => cat.id !== id),
+  }),
+  [UPDATE]: (state, { payload }) => ({
+    ...state,
+    data: updateObjectInArray(state.data, payload),
+  }),
+  [FETCH]: (state, { payload }) => ({
+    ...state,
+    data: payload,
+  }),
+});*/
 export default catReducer;
