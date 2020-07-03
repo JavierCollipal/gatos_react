@@ -3,6 +3,7 @@ import {
   decrement,
   INCREMENT,
   DECREMENT,
+  initialState,
 } from "../../../reducers/counter";
 import counterReducer from "../../../reducers/counter";
 
@@ -31,7 +32,7 @@ describe("actions creators testing", () => {
 //and that's the behavior tested below
 describe("counter reducer", () => {
   it("should return the initial state", () => {
-    expect(counterReducer(undefined, {})).toEqual(0);
+    expect(counterReducer(initialState, {})).toEqual(initialState);
   });
   it("should handle  the INCREMENT action", () => {
     expect(counterReducer(0, increment())).toEqual(1);

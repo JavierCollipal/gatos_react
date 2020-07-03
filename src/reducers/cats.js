@@ -2,6 +2,7 @@ import updateObjectInArray from "../utils/functions/Arrays/updateObjectInArray";
 import { makeType } from "../utils/functions/redux/makeType";
 import { mac } from "../utils/functions/redux/mac";
 import axios from "axios";
+import catApi from "../api/cats";
 //recordar configurar axios en otra parte
 const apiUrl =
   "https://my-json-server.typicode.com/JavierCollipal/json_cats/cats";
@@ -29,15 +30,14 @@ export const updateCat = mac(UPDATE, "payload");
 export const fetchCatsAsync = () => {
   //esta funcion que se devuelve, se encarga de ejecutar el codigo asincrono y realizar el dispatch de una acción
   //ej: una llamada a la api de gatos con axios y cuando vuelve la llamada, se realiza el dispatch de then o catch
-  return (dispatch) => {
+  return async (dispatch) => {
     //llamamos a axios
-    return (
-      axios
-        .get(apiUrl)
-        //entonces ,en base a la respuesta de axios, hacemos dispatch de acciones
-        .then((response) => dispatch(fetchCat(response.data)))
-        .catch((err) => console.log(err))
-    );
+    try {
+      const response = await catApi.fetchCats();
+      dispatch(fetchCat(response.data));
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 //extra

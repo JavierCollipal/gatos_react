@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fetchCat } from "../reducers/cats";
+
 const apiUrl =
   "https://my-json-server.typicode.com/JavierCollipal/json_cats/cats";
 const fetchCats = async () => {
@@ -7,6 +7,6 @@ const fetchCats = async () => {
 };
 
 const catApi = {
-  fetchCat,
+  fetchCats,
 };
 export default catApi;
