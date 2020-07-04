@@ -46,12 +46,11 @@ export const addCatAsync = ({ cat }) => {
     }
   };
 };
-export const updateCatAsync = ({ cat, id }) => {
+export const updateCatAsync = ({ cat }) => {
   return async (dispatch) => {
     try {
-      await catApi.updateCat(id, cat);
-      const catWithId = { ...cat, id };
-      dispatch(updateCat(catWithId));
+      await catApi.updateCat(cat.id, cat);
+      dispatch(updateCat(cat));
     } catch (e) {
       console.log(e);
     }
@@ -61,6 +60,7 @@ export const deleteCatAsync = ({ id }) => {
   return async (dispatch) => {
     try {
       await catApi.deleteCat(id);
+      dispatch(deleteCat(id));
     } catch (e) {
       console.log(e);
     }

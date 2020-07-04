@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import {
-  addCat,
-  deleteCat,
-  updateCat,
   fetchCatsAsync,
+  addCatAsync,
+  deleteCatAsync,
+  updateCatAsync,
 } from "../../reducers/cats";
 import CatForm from "./CatForm";
 import CatList from "./CatList";
@@ -80,10 +80,10 @@ const mapStateToProps = (state) => {
 //esta funcion se encarga de pasar las acciones de la store como props de componentes
 //y esto se logra creando una funcion que devuelve un objeto
 const mapDispatchToProps = (dispatch) => ({
-  addCat: (payload) => dispatch(addCat(payload)),
+  addCat: (payload) => dispatch(addCatAsync({ cat: payload })),
   fetchCats: () => dispatch(fetchCatsAsync()),
   //un setter seria el equivalente a una mutaction en vue
-  deleteCat: (payload) => dispatch(deleteCat(payload)),
-  updateCat: (payload) => dispatch(updateCat(payload)),
+  deleteCat: (payload) => dispatch(deleteCatAsync({ id: payload })),
+  updateCat: (payload) => dispatch(updateCatAsync({ cat: payload })),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Cats);
