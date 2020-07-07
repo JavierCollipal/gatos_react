@@ -5,8 +5,12 @@ import { Button } from "@material-ui/core";
 const CounterButtons = ({ increment, decrement }) => {
   return (
     <Box>
-      <Button onClick={increment}>Incrementar</Button>
-      <Button onClick={decrement}>Disminuir</Button>
+      <Button onClick={increment} id="incrementButton">
+        Incrementar
+      </Button>
+      <Button onClick={decrement} id="decrementButton">
+        Disminuir
+      </Button>
     </Box>
   );
 };
