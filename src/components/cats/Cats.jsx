@@ -54,7 +54,7 @@ const Cats = ({ cats, addCat, fetchCats, deleteCat, updateCat }) => {
 
   return (
     <div>
-      <Button color="primary" onClick={handleCreate} className="addButton">
+      <Button color="primary" onClick={handleCreate} data-cy="catAddButton">
         Añade un nuevo gato
       </Button>
       <CatList

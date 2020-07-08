@@ -4,7 +4,7 @@ describe("Home component", () => {
   });
 
   it("should display a mesage 'Diviertete interactuando con el crud de gatos o tambien puedes interactuar con el contador'", () => {
-    cy.get("p").should(
+    cy.get("[data-cy=homeInfo]").should(
       "have.text",
       "Diviertete interactuando con el crud de gatos o tambien puedes interactuar con el contador"
     );

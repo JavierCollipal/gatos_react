@@ -1,5 +1,7 @@
 import React from "react";
 
-const CounterDisplay = ({ counter }) => <h1 id="counterDisplay">{counter}</h1>;
+const CounterDisplay = ({ counter }) => (
+  <h1 data-cy="counterDisplay">{counter}</h1>
+);
 
 export default CounterDisplay;
