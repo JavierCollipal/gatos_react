@@ -4,11 +4,12 @@ import CatCard from "./CatCard";
 
 const CatList = ({ cats, handleDelete, handleUpdate }) => {
   const cardsArray = cats.map((cat) => (
-    <Grid item xs={4} key={cat.id}>
+    <Grid item xs={4} key={cat.id} className="catCard">
       <CatCard
         cat={cat}
         handleDelete={handleDelete}
         handleUpdate={handleUpdate}
+        data-cy-cat-card
       />
     </Grid>
   ));
