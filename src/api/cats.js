@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const apiUrl =
-  "https://my-json-server.typicode.com/JavierCollipal/json_cats/cats";
+const apiUrl = "https://gatos-express.herokuapp.com/api/v1/cats";
 const urlWIthId = (url, id) => `${url}/${id}`;
 const fetchCats = async () => {
   return await axios.get(apiUrl);
