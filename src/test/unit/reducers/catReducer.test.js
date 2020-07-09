@@ -75,7 +75,7 @@ describe("cat reducer", () => {
     const stateAfterAdd = catReducer(initialState, addCat(newCat));
     //we are going to add a cat then delete it by id, the expected response is a clean array in data
     const expectedState = { ...stateAfterAdd, data: [] };
-    expect(catReducer(stateAfterAdd, deleteCat(newCat.id))).toEqual(
+    expect(catReducer(stateAfterAdd, deleteCat(newCat._id))).toEqual(
       expectedState
     );
   });

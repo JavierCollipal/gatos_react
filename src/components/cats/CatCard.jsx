@@ -51,7 +51,7 @@ const CatCard = ({ cat, handleDelete, handleUpdate }) => {
             </Button>
           </Grid>
           <Grid item xs>
-            <Button size="small" onClick={() => handleDelete(cat.id)}>
+            <Button size="small" onClick={() => handleDelete(cat._id)}>
               <Delete />
             </Button>
           </Grid>

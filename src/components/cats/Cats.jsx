@@ -9,7 +9,6 @@ import {
 } from "../../reducers/cats";
 import CatForm from "./CatForm";
 import CatList from "./CatList";
-import { v4 as uuidv4 } from "uuid";
 import { defaultCatImg } from "../../utils/mock/cats";
 
 const Cats = ({ cats, addCat, fetchCats, deleteCat, updateCat }) => {
@@ -36,12 +35,7 @@ const Cats = ({ cats, addCat, fetchCats, deleteCat, updateCat }) => {
     //arreglo momentaneo para el caso de create, asignar parametros adentro del reducer estaba mal ya que no estaba corriendo bien el test de add por esto mismo
     //de todas maneras con redux thunk en add se solucionaria el problema de asignar estos valores en esta funcion
     if (updateMode) payload = { ...payload, id: formData.id };
-    else
-      payload = {
-        ...payload,
-        id: uuidv4(),
-        imageUrl: payload.imageUrl || defaultCatImg,
-      };
+    else payload = { ...payload, imageUrl: defaultCatImg };
     setDialog(false);
     updateMode ? updateCat(payload) : addCat(payload);
   };

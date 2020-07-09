@@ -30,7 +30,8 @@ export const fetchCatsAsync = () => {
     //llamamos a axios
     try {
       const response = await catApi.fetchCats();
-      dispatch(fetchCat(response.data));
+      const { cats } = response.data;
+      dispatch(fetchCat(cats));
     } catch (e) {
       console.log(e);
     }
@@ -49,7 +50,7 @@ export const addCatAsync = ({ cat }) => {
 export const updateCatAsync = ({ cat }) => {
   return async (dispatch) => {
     try {
-      await catApi.updateCat(cat.id, cat);
+      await catApi.updateCat(cat._id, cat);
       dispatch(updateCat(cat));
     } catch (e) {
       console.log(e);
@@ -90,7 +91,7 @@ const catReducer = (state = initialState, action) => {
     case DELETE:
       return {
         ...state,
-        data: state.data.filter((cat) => cat.id !== action.id),
+        data: state.data.filter((cat) => cat._id !== action.id),
       };
     case UPDATE:
       return {

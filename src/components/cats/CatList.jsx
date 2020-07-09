@@ -3,13 +3,12 @@ import Grid from "@material-ui/core/Grid";
 import CatCard from "./CatCard";
 
 const CatList = ({ cats, handleDelete, handleUpdate }) => {
-  const cardsArray = cats.map((cat) => (
-    <Grid item xs={4} key={cat.id} data-cy="catCard">
+  const cardsArray = cats.map((cat, index) => (
+    <Grid item xs={4} key={index} data-cy="catCard">
       <CatCard
         cat={cat}
         handleDelete={handleDelete}
         handleUpdate={handleUpdate}
-        data-cy-cat-card
       />
     </Grid>
   ));
