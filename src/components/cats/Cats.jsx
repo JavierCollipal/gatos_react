@@ -34,7 +34,7 @@ const Cats = ({ cats, addCat, fetchCats, deleteCat, updateCat }) => {
     //arreglo momentaneo para el error de redux-form(initialValues no esta pasando la id si es update)
     //arreglo momentaneo para el caso de create, asignar parametros adentro del reducer estaba mal ya que no estaba corriendo bien el test de add por esto mismo
     //de todas maneras con redux thunk en add se solucionaria el problema de asignar estos valores en esta funcion
-    if (updateMode) payload = { ...payload, id: formData.id };
+    if (updateMode) payload = { ...payload, id: formData._id };
     else payload = { ...payload, imageUrl: defaultCatImg };
     setDialog(false);
     updateMode ? updateCat(payload) : addCat(payload);
