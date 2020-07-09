@@ -1,22 +1,30 @@
-import updateObjectInArray from "../utils/functions/Arrays/updateObjectInArray";
-import { makeType } from "../utils/functions/redux/makeType";
-import { mac } from "../utils/functions/redux/mac";
-import catApi from "../api/cats";
+import updateObjectInArray from '../utils/functions/Arrays/updateObjectInArray';
+import { makeType } from '../utils/functions/redux/makeType';
+import { mac } from '../utils/functions/redux/mac';
+import catApi from '../api/cats';
 
 //ACTION TYPES
-const t = makeType("CAT");
-export const ADD = t("ADD");
-export const DELETE = t("DELETE");
-export const UPDATE = t("UPDATE");
-export const FETCH = t("FETCH");
+const t = makeType('CAT');
+export const ADD = t('ADD');
+export const DELETE = t('DELETE');
+export const UPDATE = t('UPDATE');
+export const FETCH = t('FETCH');
+//THUNK V2 base
+export const FETCH_START = t('FETCH_START');
+export const FETCH_SUCCESS = t('FETCH_SUCCESS');
+export const FETCH_ERROR = t('FETCH_ERROR');
 
 //ACTION CREATORS
 //mac function used
 //funciones que hacen dispatch de una action de manera mas simple
-export const addCat = mac(ADD, "payload");
-export const deleteCat = mac(DELETE, "id");
-export const fetchCat = mac(FETCH, "payload");
-export const updateCat = mac(UPDATE, "payload");
+export const addCat = mac(ADD, 'payload');
+export const deleteCat = mac(DELETE, 'id');
+export const fetchCat = mac(FETCH, 'payload');
+export const updateCat = mac(UPDATE, 'payload');
+//THUNK V2 base
+export const fetchStart = mac(FETCH_START, 'payload');
+export const fetchSuccess = mac(FETCH_SUCCESS, 'payload');
+export const fetchError = mac(FETCH_ERROR, 'error');
 
 //THUNK
 //un thunk es una función que devuelve una función, de este modo puede retrasar la ejecución de algo.
@@ -24,108 +32,88 @@ export const updateCat = mac(UPDATE, "payload");
 //ej thunk: const thunk = () => a + b, el calculo ahora es una función y con esto podemos elegir cuando realizar el calculo
 //en el contexto de redux, un thunk es un action creator que devuelve una funcion en vez de un objeto
 export const fetchCatsAsync = () => {
-  //esta funcion que se devuelve, se encarga de ejecutar el codigo asincrono y realizar el dispatch de una acción
-  //ej: una llamada a la api de gatos con axios y cuando vuelve la llamada, se realiza el dispatch de then o catch
-  return async (dispatch) => {
-    //llamamos a axios
-    try {
-      const response = await catApi.fetchCats();
-      const { cats } = response.data;
-      dispatch(fetchCat(cats));
-    } catch (e) {
-      console.log(e);
-    }
-  };
+	//esta funcion que se devuelve, se encarga de ejecutar el codigo asincrono y realizar el dispatch de una acción
+	//ej: una llamada a la api de gatos con axios y cuando vuelve la llamada, se realiza el dispatch de then o catch
+	return async dispatch => {
+		//llamamos a axios
+		try {
+			const response = await catApi.fetchCats();
+			const { cats } = response.data;
+			dispatch(fetchCat(cats));
+		} catch (e) {
+			console.log(e);
+		}
+	};
 };
 export const addCatAsync = ({ cat }) => {
-  return async (dispatch) => {
-    try {
-      await catApi.createCat(cat);
-      dispatch(addCat(cat));
-    } catch (e) {
-      console.log(e);
-    }
-  };
+	return async dispatch => {
+		try {
+			await catApi.createCat(cat);
+			dispatch(addCat(cat));
+		} catch (e) {
+			console.log(e);
+		}
+	};
 };
 export const updateCatAsync = ({ cat }) => {
-  return async (dispatch) => {
-    try {
-      await catApi.updateCat(cat._id, cat);
-      dispatch(updateCat(cat));
-    } catch (e) {
-      console.log(e);
-    }
-  };
+	return async dispatch => {
+		try {
+			await catApi.updateCat(cat._id, cat);
+			dispatch(updateCat(cat));
+		} catch (e) {
+			console.log(e);
+		}
+	};
 };
 export const deleteCatAsync = ({ id }) => {
-  return async (dispatch) => {
-    try {
-      await catApi.deleteCat(id);
-      dispatch(deleteCat(id));
-    } catch (e) {
-      console.log(e);
-    }
-  };
+	return async dispatch => {
+		try {
+			await catApi.deleteCat(id);
+			dispatch(deleteCat(id));
+		} catch (e) {
+			console.log(e);
+		}
+	};
 };
 //extra
 //STATE
 export const initialState = {
-  data: [],
-  loading: false,
-  error: false,
-  errorMessage: "",
+	data: [],
+	loading: false,
+	error: false,
+	errorMessage: '',
 };
 //REDUCER
 const catReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD:
-      return {
-        ...state,
-        data: [
-          ...state.data,
-          {
-            ...action.payload,
-          },
-        ],
-      };
-    case DELETE:
-      return {
-        ...state,
-        data: state.data.filter((cat) => cat._id !== action.id),
-      };
-    case UPDATE:
-      return {
-        ...state,
-        data: updateObjectInArray(state.data, action.payload),
-      };
-    case FETCH:
-      return {
-        ...state,
-        data: action.payload,
-      };
+	switch (action.type) {
+		case ADD:
+			return {
+				...state,
+				data: [
+					...state.data,
+					{
+						...action.payload,
+					},
+				],
+			};
+		case DELETE:
+			return {
+				...state,
+				data: state.data.filter(cat => cat._id !== action.id),
+			};
+		case UPDATE:
+			return {
+				...state,
+				data: updateObjectInArray(state.data, action.payload),
+			};
+		case FETCH:
+			return {
+				...state,
+				data: action.payload,
+			};
 
-    default:
-      return { ...state };
-  }
+		default:
+			return { ...state };
+	}
 };
-//esta forma de usar el reducer todavia no esta disponible para cats,
-//ya que tiene un conflicto con redux-form
-/*const reducer = createStoreReducer(initialState, {
-  [ADD]: (state, { payload }) => ({
-    ...state,
-    data: [...state.data, payload],
-  }),
-  [DELETE]: (state, { id }) => ({
-    ...state,
-    data: state.data.filter((cat) => cat.id !== id),
-  }),
-  [UPDATE]: (state, { payload }) => ({
-    ...state,
-    data: updateObjectInArray(state.data, payload),
-  }),
-  [FETCH]: (state, { payload }) => ({
-    ...state,
-    data: payload,
-  }),
-});*/
 export default catReducer;
