@@ -7,7 +7,7 @@ import { decrement, increment } from "../../reducers/counter";
 //Aqui vamos a mover la store de counter
 //de alguna forma tenemos que lograr que la store de counter se declare en este lado
 //para esto podemos apoyarnos de react-redux y connect
-const Counter = ({ counter, increment, decrement }) => {
+export const Counter = ({ counter, increment, decrement }) => {
   return (
     <Box>
       <CounterDisplay counter={counter} />

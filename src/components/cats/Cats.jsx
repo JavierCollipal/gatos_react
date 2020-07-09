@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import {
-  addCat,
-  deleteCat,
-  updateCat,
   fetchCatsAsync,
+  addCatAsync,
+  deleteCatAsync,
+  updateCatAsync,
 } from "../../reducers/cats";
 import CatForm from "./CatForm";
 import CatList from "./CatList";
-import { v4 as uuidv4 } from "uuid";
 import { defaultCatImg } from "../../utils/mock/cats";
 
 const Cats = ({ cats, addCat, fetchCats, deleteCat, updateCat }) => {
@@ -36,12 +35,7 @@ const Cats = ({ cats, addCat, fetchCats, deleteCat, updateCat }) => {
     //arreglo momentaneo para el caso de create, asignar parametros adentro del reducer estaba mal ya que no estaba corriendo bien el test de add por esto mismo
     //de todas maneras con redux thunk en add se solucionaria el problema de asignar estos valores en esta funcion
     if (updateMode) payload = { ...payload, id: formData.id };
-    else
-      payload = {
-        ...payload,
-        id: uuidv4(),
-        imageUrl: payload.imageUrl || defaultCatImg,
-      };
+    else payload = { ...payload, imageUrl: defaultCatImg };
     setDialog(false);
     updateMode ? updateCat(payload) : addCat(payload);
   };
@@ -54,7 +48,7 @@ const Cats = ({ cats, addCat, fetchCats, deleteCat, updateCat }) => {
 
   return (
     <div>
-      <Button color="primary" onClick={handleCreate}>
+      <Button color="primary" onClick={handleCreate} data-cy="catAddButton">
         Añade un nuevo gato
       </Button>
       <CatList
@@ -80,10 +74,10 @@ const mapStateToProps = (state) => {
 //esta funcion se encarga de pasar las acciones de la store como props de componentes
 //y esto se logra creando una funcion que devuelve un objeto
 const mapDispatchToProps = (dispatch) => ({
-  addCat: (payload) => dispatch(addCat(payload)),
+  addCat: (payload) => dispatch(addCatAsync({ cat: payload })),
   fetchCats: () => dispatch(fetchCatsAsync()),
   //un setter seria el equivalente a una mutaction en vue
-  deleteCat: (payload) => dispatch(deleteCat(payload)),
-  updateCat: (payload) => dispatch(updateCat(payload)),
+  deleteCat: (payload) => dispatch(deleteCatAsync({ id: payload })),
+  updateCat: (payload) => dispatch(updateCatAsync({ cat: payload })),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Cats);
