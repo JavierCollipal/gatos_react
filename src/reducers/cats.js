@@ -40,8 +40,8 @@ export const fetchCatsAsync = () => {
 export const addCatAsync = ({ cat }) => {
   return async (dispatch) => {
     try {
-      await catApi.createCat(cat);
-      dispatch(addCat(cat));
+      const savedCat = await catApi.createCat(cat);
+      dispatch(addCat(savedCat));
     } catch (e) {
       console.log(e);
     }
