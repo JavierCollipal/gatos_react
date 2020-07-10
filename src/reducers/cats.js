@@ -10,9 +10,8 @@ export const DELETE = t('DELETE');
 export const UPDATE = t('UPDATE');
 export const FETCH = t('FETCH');
 //THUNK V2 base
-export const FETCH_START = t('FETCH_START');
-export const FETCH_SUCCESS = t('FETCH_SUCCESS');
-export const FETCH_ERROR = t('FETCH_ERROR');
+export const ACTION_START = t('ACTION_START');
+export const ACTION_ERROR = t('ACTION_ERROR');
 
 //ACTION CREATORS
 //mac function used
@@ -21,10 +20,9 @@ export const addCat = mac(ADD, 'payload');
 export const deleteCat = mac(DELETE, 'id');
 export const fetchCat = mac(FETCH, 'payload');
 export const updateCat = mac(UPDATE, 'payload');
-//THUNK V2 base
-export const fetchStart = mac(FETCH_START, 'payload');
-export const fetchSuccess = mac(FETCH_SUCCESS, 'payload');
-export const fetchError = mac(FETCH_ERROR, 'error');
+//no necesitamos repetir start, success y error por el momento
+export const actionStart = mac(ACTION_START);
+export const actionError = mac(ACTION_ERROR, 'error');
 
 //THUNK
 //un thunk es una función que devuelve una función, de este modo puede retrasar la ejecución de algo.
@@ -36,42 +34,46 @@ export const fetchCatsAsync = () => {
 	//ej: una llamada a la api de gatos con axios y cuando vuelve la llamada, se realiza el dispatch de then o catch
 	return async dispatch => {
 		//llamamos a axios
+		dispatch(actionStart());
 		try {
 			const response = await catApi.fetchCats();
 			const { cats } = response.data;
 			dispatch(fetchCat(cats));
 		} catch (e) {
-			console.log(e);
+			dispatch(actionError('no fue posible cargar los gatos'));
 		}
 	};
 };
 export const addCatAsync = ({ cat }) => {
 	return async dispatch => {
+		dispatch(actionStart());
 		try {
 			await catApi.createCat(cat);
 			dispatch(addCat(cat));
 		} catch (e) {
-			console.log(e);
+			dispatch(actionError('no fue posible cargar los gatos'));
 		}
 	};
 };
 export const updateCatAsync = ({ cat }) => {
 	return async dispatch => {
+		dispatch(actionStart());
 		try {
 			await catApi.updateCat(cat._id, cat);
 			dispatch(updateCat(cat));
 		} catch (e) {
-			console.log(e);
+			dispatch(actionError('no fue posible cargar los gatos'));
 		}
 	};
 };
 export const deleteCatAsync = ({ id }) => {
 	return async dispatch => {
+		dispatch(actionStart());
 		try {
 			await catApi.deleteCat(id);
 			dispatch(deleteCat(id));
 		} catch (e) {
-			console.log(e);
+			dispatch(actionError('no fue posible cargar los gatos'));
 		}
 	};
 };
@@ -80,8 +82,7 @@ export const deleteCatAsync = ({ id }) => {
 export const initialState = {
 	data: [],
 	loading: false,
-	error: false,
-	errorMessage: '',
+	error: null,
 };
 //REDUCER
 const catReducer = (state = initialState, action) => {
@@ -95,23 +96,26 @@ const catReducer = (state = initialState, action) => {
 						...action.payload,
 					},
 				],
+				loading: false,
 			};
 		case DELETE:
 			return {
 				...state,
 				data: state.data.filter(cat => cat._id !== action.id),
+				loading: false,
 			};
 		case UPDATE:
 			return {
 				...state,
 				data: updateObjectInArray(state.data, action.payload),
+				loading: false,
 			};
+		case ACTION_START:
+			return { ...state, loading: true };
 		case FETCH:
-			return {
-				...state,
-				data: action.payload,
-			};
-
+			return { ...state, data: action.payload, loading: false };
+		case ACTION_ERROR:
+			return { ...state, error: action.error, loading: false };
 		default:
 			return { ...state };
 	}
