@@ -48,8 +48,8 @@ export const addCatAsync = ({ cat }) => {
 	return async dispatch => {
 		dispatch(actionStart());
 		try {
-			await catApi.createCat(cat);
-			dispatch(addCat(cat));
+			const savedCat = await catApi.createCat(cat);
+			dispatch(addCat(savedCat));
 		} catch (e) {
 			dispatch(actionError('no fue posible cargar los gatos'));
 		}
