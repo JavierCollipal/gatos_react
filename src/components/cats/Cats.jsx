@@ -5,6 +5,7 @@ import { fetchCatsAsync, addCatAsync, deleteCatAsync, updateCatAsync } from '../
 import CatForm from './CatForm';
 import CatList from './CatList';
 import { defaultCatImg } from '../../utils/mock/cats';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 export const Cats = ({ cats, loading, error, addCat, fetchCats, deleteCat, updateCat }) => {
 	const [formData, setFormData] = useState();
@@ -43,12 +44,14 @@ export const Cats = ({ cats, loading, error, addCat, fetchCats, deleteCat, updat
 
 	return (
 		<div>
-			{loading ? <h1> esta cargando</h1> : <h1> no esta cargando</h1>}
-			<h1>{error}</h1>
 			<Button color="primary" onClick={handleCreate} data-cy="catAddButton">
 				Añade un nuevo gato
 			</Button>
-			<CatList cats={cats} handleDelete={handleDelete} handleUpdate={handleUpdate} />
+			{loading ? (
+				<Skeleton animation="wave" />
+			) : (
+				<CatList cats={cats} handleDelete={handleDelete} handleUpdate={handleUpdate} />
+			)}
 			<CatForm
 				onSubmit={handleFormSubmit}
 				manageDialog={setDialog}
