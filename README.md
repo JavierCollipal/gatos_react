@@ -7,7 +7,7 @@ conceptos generales de frontend.
 ## Conocimiento
 Adjunto una imagen de mi panel de trello, donde llevo registro de lo 
 que me encuentro haciendo y aprendiendo en el proyecto.
-<a href="https://imgur.com/v1oz7pO"><img src="https://i.imgur.com/v1oz7pO.png" title="source: imgur.com" /></a>
+<img src="https://i.imgur.com/v1oz7pO.png">
 ## Scripts npm
 
 En este proyecto, puedes usar:
