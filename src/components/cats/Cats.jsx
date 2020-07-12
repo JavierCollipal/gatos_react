@@ -6,7 +6,7 @@ import CatForm from './CatForm';
 import CatList from './CatList';
 import { defaultCatImg } from '../../utils/mock/cats';
 
-const Cats = ({ cats, loading, error, addCat, fetchCats, deleteCat, updateCat }) => {
+export const Cats = ({ cats, loading, error, addCat, fetchCats, deleteCat, updateCat }) => {
 	const [formData, setFormData] = useState();
 	const [dialog, setDialog] = useState(false);
 	const [updateMode, setUpdateMode] = useState(false);
