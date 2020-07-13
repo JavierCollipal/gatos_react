@@ -1,11 +1,12 @@
 import React from 'react';
 import InfoDisplay from './InfoDisplay';
-
-const generalInfo = `Aqui puedes encontrar información tecnica sobre las tecnologias que se usan en este proyecto`;
-//recordatorio, esto tiene potencial para ser llevado a la db.
-const backendContent = `en este proyecto estoy ocupando express y mongoDb para guardar a los gatos`;
-const frontendContent = `en este proyecto estoy ocupando react, y redux para administrar el estado `;
-const componentPattern = `en este proyecto estoy trabajando con componentes funcionales y los complemento con react hooks`;
+import {
+	backendContent,
+	componentPattern,
+	frontendContent,
+	generalInfo,
+	testingContent,
+} from './infoData';
 
 const Info = () => {
 	return (
@@ -14,6 +15,7 @@ const Info = () => {
 			<InfoDisplay title="frontend" content={frontendContent} />
 			<InfoDisplay title="backend" content={backendContent} />
 			<InfoDisplay title="component design pattern" content={componentPattern} />
+			<InfoDisplay title="testing" content={testingContent} />
 		</div>
 	);
 };
