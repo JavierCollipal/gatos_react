@@ -44,14 +44,17 @@ export const Cats = ({ cats, loading, error, addCat, fetchCats, deleteCat, updat
 
 	return (
 		<div>
-			<Button color="primary" onClick={handleCreate} data-cy="catAddButton">
-				Añade un nuevo gato
-			</Button>
 			{loading ? (
 				<Skeleton animation="wave" />
 			) : (
-				<CatList cats={cats} handleDelete={handleDelete} handleUpdate={handleUpdate} />
+				<div>
+					<Button color="primary" onClick={handleCreate} data-cy="catAddButton">
+						Añade un nuevo gato
+					</Button>
+					<CatList cats={cats} handleDelete={handleDelete} handleUpdate={handleUpdate} />
+				</div>
 			)}
+
 			<CatForm
 				onSubmit={handleFormSubmit}
 				manageDialog={setDialog}
