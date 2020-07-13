@@ -10,7 +10,7 @@ configure({ adapter: new Adapter() });
 describe('Info', () => {
 	it('Deberia tener un p que describa que pasa en este componente', () => {
 		const wrapper = shallow(<Info />);
-		const foundElement = wrapper.find('[data-cy="general-info"]');
+		const foundElement = wrapper.find('p');
 		expect(foundElement.text().length).toBeGreaterThanOrEqual(20);
 	});
 	it('Deberia tener uno o mas InfoDisplay', () => {
